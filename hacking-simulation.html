@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacker Simulation</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    p {
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 4.1vh;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      color: limegreen;
+      text-shadow: 0px 0px 10px limegreen;
+    }
+
+    .msg {
+      font-family: monospace;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 5vh;
+      padding-top: 5vh;
+      background: red;
+      box-shadow: 0 0 30px red;
+      text-shadow: 0 0 20px white;
+      color: white;
+      width: 20vw;
+      height: 15vh;
+      position: absolute;
+      left: 50%;
+      margin-left: -10vw;
+      top: 50%;
+      margin-top: -5vh;
+      text-align: center;
+      min-width: 200px;
+      animation-name: blink;
+      animation-duration: 0.6s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: linear;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .footer {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .visitors {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    body {
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="msg">you are being hacked</div>
+  <div id="console"></div>
+  <div class="footer" onclick="openInfo()">© All rights reserved to Jawad Tafish</div>
+  <div class="visitors" onclick="resetCounter()">Visitors Count: <span id="visitor-count"></span></div>
+
+  <script>
+    var intervalID = window.setInterval(updateScreen, 200);
+    var c = document.getElementById("console");
+    var visitorCount = localStorage.getItem('visitorCount') || 0;
+
+    var txt = [
+      "FORCE: XX0022. ENCYPT://000.222.2345",
+      "TRYPASS: ********* AUTH CODE: ALPHA GAMMA: 1___ PRIORITY 1",
+      "RETRY: REINDEER FLOTILLA",
+      "Z:> /FALKEN/GAMES/TICTACTOE/ EXECUTE -PLAYERS 0",
+      "================================================",
+      "Priority 1 // local / scanning...",
+      "scanning ports...",
+      "BACKDOOR FOUND (23.45.23.12.00000000)",
+      "BACKDOOR FOUND (13.66.23.12.00110000)",
+      "BACKDOOR FOUND (13.66.23.12.00110044)",
+      "...",
+      "...",
+      "BRUTE.EXE -r -z",
+      "...locating vulnerabilities...",
+      "...vulnerabilities found...",
+      "MCP/> DEPLOY CLU",
+      "SCAN: __ 0100.0000.0554.0080",
+      "SCAN: __ 0020.0000.0553.0080",
+      "SCAN: __ 0001.0000.0554.0550",
+      "SCAN: __ 0012.0000.0553.0030",
+      "SCAN: __ 0100.0000.0554.0080",
+      "SCAN: __ 0020.0000.0553.0080",
+      "SCAN: __ 1020.0900.0553.4080",
+      "THE_SYSTEM IS FALLING DOWN",
+      "ENCRYPTING DATA...",
+      "MCP/> INITIATE COUNTERMEASURES",
+      "...activating security protocols...",
+      "DECRYPTION IN PROGRESS...",
+      "...",
+      "...",
+      "HACKER AT RISK DETECTED...",
+      "ALERT: MALWARE DEPLOYED",
+      "...",
+      "...",
+      "OVERRIDE SYSTEM SECURITY",
+      "SEEKING TARGET...",
+      "TARGET ACQUIRED",
+      "DISABLING FIREWALL...",
+      "...",
+      "...",
+      "BREACH SUCCESSFUL",
+      "ACCESS GRANTED TO ROOT DIRECTORY",
+      "SCAN COMPLETE: NO THREATS DETECTED",
+      "LOGGING OUT...",
+      "...",
+      "...",
+      "HACKER SESSION TERMINATED"
+    ];
+
+    var docfrag = document.createDocumentFragment();
+
+    function updateScreen() {
+      txt.push(txt.shift());
+      txt.forEach(function(e) {
+        var p = document.createElement("p");
+        p.textContent = e;
+        docfrag.appendChild(p);
+      });
+      while (c.firstChild) {
+        c.removeChild(c.firstChild);
+      }
+      c.appendChild(docfrag);
+    }
+
+    function updateVisitorCount() {
+      visitorCount++;
+      localStorage.setItem('visitorCount', visitorCount);
+      document.getElementById('visitor-count').textContent = visitorCount;
+    }
+
+    function resetCounter() {
+      var password = prompt('Enter admin password to reset:');
+      if (password === '1221JA') {
+        visitorCount = 0;
+        localStorage.setItem('visitorCount', visitorCount);
+        document.getElementById('visitor-count').textContent = visitorCount;
+        alert('Visitor count has been reset.');
+      } else {
+        alert('Incorrect password.');
+      }
+    }
+
+    function openInfo() {
+      var newWindow = window.open('', '_blank');
+      newWindow.document.write('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>About Hacking Simulation</title></head><body style="background-color: black; color: white; font-family: Arial, sans-serif;"><h1>About Hacking Simulation</h1><ul><li>This simulation is for entertainment purposes only.</li><li>The content displayed is not real and should not be taken seriously.</li><li>It is meant to provide a fun and engaging experience.</li><li>No actual hacking or malicious activity is taking place.</li></ul></body></html>');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateVisitorCount();
+    });
+  </script>
+</body>
+</html>
